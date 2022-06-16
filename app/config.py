@@ -7,8 +7,8 @@ To add more configurations, change the Settings classes and populate .env accord
 
 from __future__ import annotations
 
-from pydantic import BaseSettings
 from loguru import logger
+from pydantic import BaseSettings
 
 settings: Settings
 # this uses the prebound method pattern
@@ -19,6 +19,11 @@ Attribute with general settings.
 It requires invoking config.setup() before using.
 """
 
+
+class Settings(BaseSettings):
+    example: str
+
+
 def __getattr__(name):
     global _settings
 
@@ -28,14 +33,10 @@ def __getattr__(name):
     if name == "settings":
         if not _settings:
             setup()
-        
+
         return _settings
     else:
         raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
-
-
-class Settings(BaseSettings):
-    example: str
 
 
 def setup():
@@ -44,8 +45,13 @@ def setup():
         _settings = Settings()
     except Exception as e:
         logger.error(e)
-        logger.error("This may have been caused by an empty or invalid .env file. Please see example.env for examples.")
+        logger.error(
+            "This may have been caused by an empty or invalid .env file. Please see example.env for examples."
+        )
         raise
-    logger.debug(f"Populed settings based on environment variables: {_settings.__dict__}")
+    logger.debug(
+        f"Populed settings based on environment variables: {_settings.__dict__}"
+    )
 
-_settings: Settings = None
+
+_settings: Settings | None = None
