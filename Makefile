@@ -4,7 +4,6 @@
 
 .DEFAULT_GOAL:=help
 
-
 SOURCE:=app
 TESTS:=tests
 EXTRA:=extra
@@ -14,6 +13,8 @@ DOCKER_IMG:=my_python_app
 DOCKER_CONTAINER:=$(DOCKER_IMG)
 DOCKER_TAG:=latest
 
+INSTALL_STAMP := .venv/.install.stamp
+
 
 ifndef POETRY_ACTIVE 
     $(warning Tip: Activate a poetry shell to run make faster) 
@@ -21,15 +22,16 @@ ifndef POETRY_ACTIVE
  endif
 
 
-.venv/.install.stamp: .venv/bin/python poetry.lock pyproject.toml
+install: $(INSTALL_STAMP) ## install the project dependencies in a virtual environment
+$(INSTALL_STAMP): poetry.lock pyproject.toml 
 	poetry lock
 	poetry install
-	touch .venv/.install.stamp
+	touch $(INSTALL_STAMP)
 
 .PHONY: all
 all: format lint test cov ## formats, lints and tests
 
-.PHONY: tall
+.PHONY: tall ## checks types and all targets
 tall: type all
 
 .PHONY: update
@@ -37,30 +39,35 @@ update: ## Updates all packages
 	poetry update
 
 .PHONY: run
-run: .venv/.install.stamp  ## runs the python application
+run: $(INTALL_STAMP)  ## runs the python application
 	$(CMD) dotenv -f .env run -- python app
 
 .PHONY: clean
 clean: ## removes files generated during installation or compilation
-	rm -rf .venv 
+	rm -rf .venv
 	find . -type f -name *.pyc -delete
-    find . -type d -name __pycache__ -delete
+	find . -type d -name __pycache__ -delete
 
-format: .venv/.install.stamp ## Formats the code and sorts imports consistently
+.PHONY: format
+format: $(INSTALL_STAMP) ## Formats the code and sorts imports consistently
 	$(CMD) black ${ALL_CODE} 
 	$(CMD) isort --profile=black ${ALL_CODE}
 
-lint: .venv/.install.stamp ## Analyzes the code and reports inconsistencies
+.PHONY: lint
+lint: $(INSTALL_STAMP) ## Analyzes the code and reports inconsistencies
 	$(CMD) flake8 $(SOURCE) ${EXTRA} --extend-ignore=E501
 	$(CMD) pylint --disable=all --enable=W1505,W0402,W0110,E,F --extension-pkg-whitelist=pydantic ${SOURCE} 
 
-type: .venv/.install.stamp ## checks types in code
+.PHONY: type
+type: $(INSTALL_STAMP) ## checks types in code
 	$(CMD) mypy $(ALL_CODE)
 
-test: .venv/.install.stamp ## run tests
+.PHONY: test
+test: $(INSTALL_STAMP) ## run tests
 	$(CMD) coverage run  --source=${SOURCE}/ -m pytest $(TESTS)
 
-cov: .venv/.install.stamp ## gets test coverage for previous test run
+.PHONY: cov
+cov: $(INSTALL_STAMP) ## gets test coverage for previous test run
 	$(CMD) coverage report 
 
 
