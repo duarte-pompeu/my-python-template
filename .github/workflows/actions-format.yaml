@@ -25,17 +25,12 @@ jobs:
         run: make install
       - name: format
         run: make format
-      - name: push formatted code
+      - name: Create pull request
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         if: steps.make-all.outputs.modified == 'true'
+      - name: Check outputs
         run: |
-          echo "Detected some changes after running the formatter and created a PR with them."
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
-        # run: |
-        #   git config user.name 'duarte-pompeu'
-        #   git config user.email 'duarte-pompeu@users.noreply.github.com'
-        #   date=$(date +%s)
-        #   git switch -c ${{ branch }}-$date
-        #   git commit -am "Formatted the code during the workflow"
-
+        echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+        echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+      
