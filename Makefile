@@ -1,60 +1,70 @@
 # inspired by https://gist.github.com/trickeydan/0bace38b00ba8488b5aa1f178b1f3f33
+# and https://blog.mathieu-leplatre.info/tips-for-your-makefile-with-python.html
+# and https://venthur.de/2021-03-31-python-makefiles.html
 
-.PHONY: all path update install run clean format lint type test test-cov help
 .DEFAULT_GOAL:=help
 
-ifndef POETRY_ACTIVE 
-    $(warning Tip: Activate a poetry shell to run make commands faster) 
-    CMD := poetry run 
- endif
 
-SOURCE_CODE:=app
+SOURCE:=app
 TESTS:=tests
-EXTRA_CODE:=extra
-ALL_CODE := ${SOURCE_CODE} ${TESTS} ${EXTRA_CODE}
+EXTRA:=extra
+ALL_CODE := ${SOURCE} ${TESTS} ${EXTRA}
 
 DOCKER_IMG:=my_python_app
 DOCKER_CONTAINER:=$(DOCKER_IMG)
 DOCKER_TAG:=latest
 
+
+ifndef POETRY_ACTIVE 
+    $(warning Tip: Activate a poetry shell to run make faster) 
+    CMD := poetry run 
+ endif
+
+
+.venv/.install.stamp: .venv/bin/python poetry.lock pyproject.toml
+	poetry lock
+	poetry install
+	touch .venv/.install.stamp
+
 .PHONY: all
-all: install format lint test cov ## Applys many useful targets
+all: format lint test cov ## formats, lints and tests
+
+.PHONY: tall
+tall: type all
 
 .PHONY: update
 update: ## Updates all packages 
 	poetry update
 
-.PHONY: install
-install: ## installs necessary packages
-	poetry install
-
 .PHONY: run
-run:  ## runs the python application
+run: .venv/.install.stamp  ## runs the python application
 	$(CMD) dotenv -f .env run -- python app
 
 .PHONY: clean
-clean: ## FIXME: Does nothing at the moment
+clean: ## removes files generated during installation or compilation
+	rm -rf .venv 
+	find . -type f -name *.pyc -delete
+    find . -type d -name __pycache__ -delete
 
-format: ## Formats the code and sorts imports consistently
+format: .venv/.install.stamp ## Formats the code and sorts imports consistently
 	$(CMD) black ${ALL_CODE} 
 	$(CMD) isort --profile=black ${ALL_CODE}
 
-lint: ## Analyzes the code and reports inconsistencies
-	$(CMD) flake8 $(SOURCE_CODE) ${EXTRA_CODE} --extend-ignore=E501
-	$(CMD) pylint --disable=all --enable=W1505,W0402,W0110,E,F --extension-pkg-whitelist=pydantic ${SOURCE_CODE} 
+lint: .venv/.install.stamp ## Analyzes the code and reports inconsistencies
+	$(CMD) flake8 $(SOURCE) ${EXTRA} --extend-ignore=E501
+	$(CMD) pylint --disable=all --enable=W1505,W0402,W0110,E,F --extension-pkg-whitelist=pydantic ${SOURCE} 
 
-type:
-	$(CMD) mypy $(SOURCE_CODE) $(TESTS) $(EXTRA_CODE)
+type: .venv/.install.stamp ## checks types in code
+	$(CMD) mypy $(ALL_CODE)
 
-test: ## run tests
-	$(CMD) coverage run  --source=${SOURCE_CODE}/ -m pytest $(TESTS)
+test: .venv/.install.stamp ## run tests
+	$(CMD) coverage run  --source=${SOURCE}/ -m pytest $(TESTS)
 
-cov: ## gets test coverage for previous test run
+cov: .venv/.install.stamp ## gets test coverage for previous test run
 	$(CMD) coverage report 
 
 
-
-
+# TODO
 # build: ## builds a docker image with the project
 # 	docker build . -t $(DOCKER_IMG):$(DOCKER_TAG)
 
