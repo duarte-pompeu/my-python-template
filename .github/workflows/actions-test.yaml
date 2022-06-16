@@ -23,5 +23,5 @@ jobs:
         run: poetry config virtualenvs.in-project true
       - name: build the application
         run: make install
-      - name: lint and test
-        run: make lint test
+      - name: test
+        run: make test
