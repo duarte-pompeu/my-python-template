@@ -7,6 +7,9 @@ from loguru import logger
 
 class WebServer:
     def run(self):
+        # code taken from https://docs.python.org/3/library/wsgiref.html#examples
+        # would be easier with fastapi or flask but that's overkill for a python template
+        # which might not need them
         def simple_app(environ, start_response):
 
             status = "200 OK"

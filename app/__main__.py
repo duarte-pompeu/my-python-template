@@ -7,6 +7,6 @@ print("Hello, world!")
 print(f"Example from config: {config.settings.example}")
 
 # implement a web server using only the standard library
-# just do display docker and kubernetes working
+# just so we can show some results in docker and kubernetes
 server = WebServer()
 server.run()
