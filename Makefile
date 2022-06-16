@@ -28,16 +28,6 @@ $(INSTALL_STAMP): poetry.lock pyproject.toml
 	poetry install
 	touch $(INSTALL_STAMP)
 
-.PHONY: all
-all: format lint test cov ## formats, lints and tests
-
-.PHONY: tall ## checks types and all targets
-tall: type all
-
-.PHONY: update
-update: ## Updates all packages 
-	poetry update
-
 .PHONY: run
 run: $(INTALL_STAMP)  ## runs the python application
 	$(CMD) dotenv -f .env run -- python app
@@ -47,6 +37,13 @@ clean: ## removes files generated during installation or compilation
 	rm -rf .venv
 	find . -type f -name *.pyc -delete
 	find . -type d -name __pycache__ -delete
+
+
+.PHONY: all
+all: format lint test cov ## formats, lints and tests
+
+.PHONY: tall ## checks types and all targets
+tall: type all
 
 .PHONY: format
 format: $(INSTALL_STAMP) ## Formats the code and sorts imports consistently
