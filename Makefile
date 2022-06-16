@@ -48,8 +48,6 @@ format: $(INSTALL_STAMP) ## Formats the code and sorts imports consistently
 
 .PHONY: lint
 lint: $(INSTALL_STAMP) ## Analyzes the code and reports inconsistencies
-	$(CMD) black ${ALL_CODE} --check
-	$(CMD) isort --profile=black ${ALL_CODE} --check-only
 	$(CMD) flake8 $(SOURCE) ${EXTRA} --extend-ignore=E501
 	$(CMD) pylint --disable=all --enable=W1505,W0402,W0110,E,F --extension-pkg-whitelist=pydantic ${SOURCE} 
 
