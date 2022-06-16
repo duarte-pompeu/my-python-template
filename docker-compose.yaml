@@ -1,7 +1,10 @@
 services:
-  my_python_project:
-    container_name: my_python_project
+  my-python-project:
+    image: my-python-project:latest
+    container_name: my-python-project
     build: .
+    ports:
+    - 8000:8000
     env_file:
       - .env
     # entrypoint: /bin/sleep 3600 # use to debug 

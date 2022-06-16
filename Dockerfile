@@ -9,9 +9,13 @@ RUN poetry config virtualenvs.create false
 COPY pyproject.toml .
 RUN poetry install --no-dev
 
+# copy assets
+COPY ./assets ./assets
+
 # copy the code
 COPY ./app ./app 
 ENV PYTHONPATH=.${PYTHONPATH}:${PWD}
+
 
 # run the program
 ENTRYPOINT ["python3", "app"]

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-project-deployment
+  labels:
+    app: my-python-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-python-project
+  template:
+    metadata:
+      labels:
+        app: my-python-project
+    spec:
+      containers:
+      - name: my-python-project
+        image: docker.io/library/my-python-project:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+          - name: EXAMPLE
+            valueFrom:
+              configMapKeyRef:
+                name: my-python-project
+                key: example
