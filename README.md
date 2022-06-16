@@ -2,7 +2,7 @@
 
 A minimalistic, but opinionated, Python template using pyenv and poetry.
 
-# Requirements
+## Requirements
 
 - [Poetry](https://python-poetry.org/docs/#installation)
 - [Pyenv](https://github.com/pyenv/pyenv#installation)
