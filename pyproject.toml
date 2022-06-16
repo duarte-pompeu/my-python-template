@@ -6,6 +6,7 @@ authors = ["duarte-pompeu <duarte-pompeu@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "3.10.5"
+pydantic = "1.9.1"
 
 [tool.poetry.dev-dependencies]
 bandit = "1.7.4"
