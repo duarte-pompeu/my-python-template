@@ -3,7 +3,6 @@ on: pull_request
 
 jobs:
   test:
-    needs: lint
     strategy:
       fail-fast: false
       matrix:
