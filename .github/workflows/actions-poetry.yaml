@@ -11,7 +11,7 @@ jobs:
         os: [ubuntu-20.04, ubuntu-22.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
@@ -24,4 +24,17 @@ jobs:
       - name: build the application
         run: make install
       - name: format lint and test
+        id: make-all
         run: make all
+      - name: push formatted code
+        if: steps.make-all.outputs.modified == 'true'
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+        # run: |
+        #   git config user.name 'duarte-pompeu'
+        #   git config user.email 'duarte-pompeu@users.noreply.github.com'
+        #   date=$(date +%s)
+        #   git switch -c ${{ branch }}-$date
+        #   git commit -am "Formatted the code during the workflow"
+
