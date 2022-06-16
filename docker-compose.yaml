@@ -1,0 +1,7 @@
+services:
+  my_python_project:
+    container_name: my_python_project
+    build: .
+    env_file:
+      - .env
+    # entrypoint: /bin/sleep 3600 # use to debug 
