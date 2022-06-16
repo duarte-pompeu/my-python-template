@@ -13,7 +13,7 @@ INSTALL_STAMP := .venv/.install.stamp
 
 
 ifndef POETRY_ACTIVE 
-    $(warning Tip: Activate a poetry shell to run makefile targets faster) 
+    $(warning Tip: Activate a poetry shell to run makefile targets faster: around 1 second per command) 
     CMD := poetry run 
  endif
 
