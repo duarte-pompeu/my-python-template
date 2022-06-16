@@ -2,7 +2,8 @@ name: Test
 on: pull_request
 
 jobs:
-  ci:
+  test:
+    needs: lint
     strategy:
       fail-fast: false
       matrix:

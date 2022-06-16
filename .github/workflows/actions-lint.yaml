@@ -2,7 +2,8 @@ name: Lint
 on: pull_request
 
 jobs:
-  ci:
+  lint:
+    needs: format
     strategy:
       fail-fast: false
       matrix:
