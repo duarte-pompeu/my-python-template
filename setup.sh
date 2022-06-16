@@ -17,4 +17,9 @@ poetry config virtualenvs.in-project true
 pyenv install "$PYTHON_VERSION"
 poetry env use "$PYENV_ROOT"/versions/"$PYTHON_VERSION"/bin/python
 poetry install
+
+# create example configuration file
+copy example.env .env
+
+# run the example application
 poetry run python app/
