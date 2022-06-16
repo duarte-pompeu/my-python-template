@@ -17,5 +17,4 @@ def test_empty_settings():
 
 def test_populated_settings():
     settings = Settings(example="hey")
-
     assert settings.example == "hey"

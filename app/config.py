@@ -11,13 +11,13 @@ from loguru import logger
 from pydantic import BaseSettings
 
 settings: Settings
-# this uses the prebound method pattern
-# further reading: https://python-patterns.guide/python/prebound-methods/
 """
 Attribute with general settings.
 
 It requires invoking config.setup() before using.
 """
+# this uses the prebound method pattern
+# further reading: https://python-patterns.guide/python/prebound-methods/
 
 
 class Settings(BaseSettings):
