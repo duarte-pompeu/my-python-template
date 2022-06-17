@@ -15,8 +15,7 @@ INSTALL_STAMP := .venv/.install.stamp
 ifndef POETRY_ACTIVE 
     $(warning Tip: Activate a poetry shell to run makefile targets faster: around 1 second per command) 
     CMD := poetry run 
- endif
-
+endif
 
 install: $(INSTALL_STAMP) ## install the project dependencies in a virtual environment
 $(INSTALL_STAMP): poetry.lock pyproject.toml 
