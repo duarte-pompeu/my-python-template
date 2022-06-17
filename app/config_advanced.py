@@ -7,7 +7,6 @@ There's a simpler version in config_simple.py.
 
 from __future__ import annotations
 
-from loguru import logger
 from pydantic import BaseSettings
 
 settings: Settings
@@ -30,5 +29,6 @@ def __getattr__(name):
         return _settings
     else:
         raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
+
 
 _settings: Settings | None = None
