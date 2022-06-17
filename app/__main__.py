@@ -1,6 +1,6 @@
-from app import config, webserver
-
-config.setup()
+# from app import config_simple as config
+from app import config_advanced as config
+from app import webserver
 
 print("Hello, world!")
 print(f"Example from config: {config.settings.example}")

@@ -1,7 +1,13 @@
+"""
+Tests settings from config_advanced.py.
+
+Unlike config_simple, you may import the module without loading configuration.
+"""
+
 import pytest
 from pydantic import ValidationError
 
-from app.config import Settings
+from app.config_advanced import Settings
 
 
 def test_empty_settings():

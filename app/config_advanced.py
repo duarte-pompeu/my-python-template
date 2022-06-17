@@ -1,7 +1,7 @@
 """
-Module where you can access your configurations.
+Module where you can access your configurations, with delayed loading.
 
-To add more configurations, change the Settings classes and populate .env accordingly.
+There's a simpler version in config_simple.py.
 """
 
 
@@ -11,13 +11,6 @@ from loguru import logger
 from pydantic import BaseSettings
 
 settings: Settings
-"""
-Attribute with general settings.
-
-It requires invoking config.setup() before using.
-"""
-# this uses the prebound method pattern
-# further reading: https://python-patterns.guide/python/prebound-methods/
 
 
 class Settings(BaseSettings):
