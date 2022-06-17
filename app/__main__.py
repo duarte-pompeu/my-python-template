@@ -1,5 +1,4 @@
-import config
-from webserver import WebServer
+from app import config, webserver
 
 config.setup()
 
@@ -8,5 +7,5 @@ print(f"Example from config: {config.settings.example}")
 
 # implement a web server using only the standard library
 # just so we can show some results in docker and kubernetes
-server = WebServer()
+server = webserver.WebServer()
 server.run()
