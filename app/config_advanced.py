@@ -20,31 +20,15 @@ class Settings(BaseSettings):
 def __getattr__(name):
     global _settings
 
-    # this will setup necessary config if someone tries to get the settings
-    # but hasn't set manually set up things
-    # it's useful to delay this, so we don't need to apply configurations when not needed, eg unit tests
+    # this will setup necessary config when someone tries to get the settings
+    # it's useful to delay this, so we don't need to apply configurations at import time
+    # eg tests may import modules without loading configuration from .env
     if name == "settings":
         if not _settings:
-            setup()
+            _settings = Settings()
 
         return _settings
     else:
         raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
-
-
-def setup():
-    global _settings
-    try:
-        _settings = Settings()
-    except Exception as e:
-        logger.error(e)
-        logger.error(
-            "This may have been caused by an empty or invalid .env file. Please see example.env for examples."
-        )
-        raise
-    logger.debug(
-        f"Populed settings based on environment variables: {_settings.__dict__}"
-    )
-
 
 _settings: Settings | None = None
