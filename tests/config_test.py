@@ -7,7 +7,7 @@ Unlike config_simple, you may import the module without loading configuration.
 import pytest
 from pydantic import ValidationError
 
-from app.config_advanced import Settings
+from app.config import GeneralSettings
 
 
 def test_empty_settings():
@@ -18,9 +18,9 @@ def test_empty_settings():
     But with the prebound method pattern, we can executing tests without configurations!
     """
     with pytest.raises(ValidationError):
-        Settings()
+        GeneralSettings()
 
 
 def test_populated_settings():
-    settings = Settings(example="hey")
+    settings = GeneralSettings(example="hey")
     assert settings.example == "hey"
