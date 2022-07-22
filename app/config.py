@@ -12,9 +12,13 @@ This is avoided in config_advanced.py.
 """
 from pydantic import BaseSettings
 
+general: "GeneralSettings"
 
-class Settings(BaseSettings):
+
+def setup():
+    global general
+    general = GeneralSettings()  # pyright: ignore
+
+
+class GeneralSettings(BaseSettings):
     example: str
-
-
-settings = Settings()
