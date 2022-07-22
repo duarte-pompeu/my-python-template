@@ -59,3 +59,26 @@ If you're a beginner, this may not be the best template for you. But if you stil
 - change pyproject.toml to the python version you have
 
 Beginner or not, if you're not interested in infrastructure, you can ignore everything related to docker, kubernetes, helm, ci/cd.
+
+## Debugging with VS Code
+
+```json
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Main",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/app/main.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}${pathSeparator}${env:PYTHONPATH}"
+            }
+        }
+    ]
+}
+```
