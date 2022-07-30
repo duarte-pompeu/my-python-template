@@ -18,4 +18,4 @@ ENV PYTHONPATH=.${PYTHONPATH}:${PWD}
 
 
 # run the program
-ENTRYPOINT ["python3", "app"]
+ENTRYPOINT ["python3", "app/main.py"]

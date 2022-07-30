@@ -25,7 +25,7 @@ $(INSTALL_STAMP): poetry.lock pyproject.toml
 
 .PHONY: run
 run: $(INTALL_STAMP)  ## runs the python application
-	PYTHONPATH=. $(CMD) dotenv -f .env run -- python app
+	PYTHONPATH=. $(CMD) dotenv -f .env run -- python app/main.py
 
 .PHONY: clean
 clean: ## removes files generated during installation or compilation
