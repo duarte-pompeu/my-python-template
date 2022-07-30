@@ -7,7 +7,7 @@
 SOURCE:=app
 TESTS:=tests
 EXTRA:=extra
-ALL_CODE := ${SOURCE} ${TESTS} ${EXTRA}
+ALL_CODE := $(SOURCE) $(TESTS) $(EXTRA)
 
 INSTALL_STAMP := .venv/.install.stamp
 
@@ -25,7 +25,7 @@ $(INSTALL_STAMP): poetry.lock pyproject.toml
 
 .PHONY: run
 run: $(INTALL_STAMP)  ## runs the python application
-	PYTHONPATH=. $$(CMD) dotenv -f .env run -- python app
+	PYTHONPATH=. $(CMD) dotenv -f .env run -- python app
 
 .PHONY: clean
 clean: ## removes files generated during installation or compilation
@@ -42,13 +42,13 @@ tall: type all
 
 .PHONY: format
 format: $(INSTALL_STAMP) ## Formats the code and sorts imports consistently
-	PYTHONPATH=. $(CMD) black ${ALL_CODE} 
-	PYTHONPATH=. $(CMD) isort --profile=black ${ALL_CODE}
+	PYTHONPATH=. $(CMD) black $(ALL_CODE) 
+	PYTHONPATH=. $(CMD) isort --profile=black $(ALL_CODE)
 
 .PHONY: lint
 lint: $(INSTALL_STAMP) ## Analyzes the code and reports inconsistencies
-	PYTHONPATH=. $(CMD) flake8 $(SOURCE) ${EXTRA} --extend-ignore=E501
-	PYTHONPATH=. $(CMD) pylint --disable=all --enable=W1505,W0402,W0110,E,F --extension-pkg-whitelist=pydantic ${SOURCE} 
+	PYTHONPATH=. $(CMD) flake8 $(SOURCE) $(EXTRA) --extend-ignore=E501
+	PYTHONPATH=. $(CMD) pylint --disable=all --enable=W1505,W0402,W0110,E,F --extension-pkg-whitelist=pydantic $(SOURCE) 
 
 .PHONY: type
 type: $(INSTALL_STAMP) ## checks types in code
@@ -56,7 +56,7 @@ type: $(INSTALL_STAMP) ## checks types in code
 
 .PHONY: test
 test: $(INSTALL_STAMP) ## run tests
-	PYTHONPATH=. $(CMD) coverage run  --source=${SOURCE}/ -m pytest $(TESTS)
+	PYTHONPATH=. $(CMD) coverage run  --source=$(SOURCE)/ -m pytest $(TESTS)
 
 .PHONY: cov
 cov: $(INSTALL_STAMP) ## gets test coverage for previous test run
