@@ -19,7 +19,7 @@ poetry env use "$PYENV_ROOT"/versions/"$PYTHON_VERSION"/bin/python
 poetry install
 
 # create example configuration file
-cp example.env .env
+cp env/example.env env/app.env
 
 # run the example application
 PYTHONPATH=. make run
