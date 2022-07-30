@@ -14,12 +14,12 @@ read -i "Are you happy with these values? Yes: Enter / No: Ctl-C"
 
 # set up dependencies using poetry and pyenv
 poetry config virtualenvs.in-project true
-pyenv install "$PYTHON_VERSION"
+pyenv install "$PYTHON_VERSION" || true
 poetry env use "$PYENV_ROOT"/versions/"$PYTHON_VERSION"/bin/python
 poetry install
 
 # create example configuration file
-copy example.env .env
+cp example.env .env
 
 # run the example application
-poetry run python app/
+PYTHONPATH=. make run
