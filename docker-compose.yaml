@@ -6,5 +6,5 @@ services:
     ports:
     - 8000:8000
     env_file:
-      - .env
+      - env/app.env
     # entrypoint: /bin/sleep 3600 # use to debug 
