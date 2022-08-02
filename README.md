@@ -23,7 +23,7 @@ Populate `env/app.env` for your configuration. An example is available at `env/e
 - lets different people to use different configs
 - avoids exposing sensible configurations, eg passwords
 
-## Running the example webserver
+## Running the application
 
 ```bash
 make run
@@ -52,7 +52,7 @@ If you want to see the results, you can use port-forwarding:
 kubectl port-forward services/my-python-project 8000:80
 ```
 
-And now you can validate your orchestrated deployment at http://localhost:8000.
+And now you can validate your orchestration at http://localhost:8000.
 
 ## Help
 
