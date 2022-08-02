@@ -15,11 +15,15 @@ bash setup.sh
 
 ## Configuration
 
-Populate `.env`, which is not version controlled to:
-- enable different people to use different configs
-- avoid exposing sensible configurations, eg passwords
 
-## Running an example webserver
+Populate `env/app.env` for your configuration. An example is available at `env/example.env`.
+
+`env/app.env` is not version controlled because this:
+
+- lets different people to use different configs
+- avoids exposing sensible configurations, eg passwords
+
+## Running the application
 
 ```bash
 make run
@@ -33,8 +37,7 @@ The webserver should be accessible now at http://localhost:8000.
 docker compose up
 ```
 
-The webserver should be accessible now at http://localhost:8000.
-
+The containerized webserver should be accessible now at http://localhost:8000.
 
 ## Running with kubernetes
 
@@ -49,7 +52,7 @@ If you want to see the results, you can use port-forwarding:
 kubectl port-forward services/my-python-project 8000:80
 ```
 
-And now you can validate the deployment at http://localhost:8000.
+And now you can validate your orchestration at http://localhost:8000.
 
 ## Help
 
@@ -58,4 +61,4 @@ If you're a beginner, this may not be the best template for you. But if you stil
 - ignore `pyenv`, delete it from `setup.sh`
 - change pyproject.toml to the python version you have
 
-Beginner or not, if you're not interested in infrastructure, you can ignore everything related to docker, kubernetes, helm, ci/cd.
+Additionally, if you're not interested in infrastructure, you can ignore everything related to docker, kubernetes, helm, ci/cd.
