@@ -18,7 +18,7 @@ bash setup.sh
 
 Populate `env/app.env` for your configuration. An example is available at `env/example.env`.
 
-`env/app.env` is not versioned control because this:
+`env/app.env` is not version controlled because this:
 
 - lets different people to use different configs
 - avoids exposing sensible configurations, eg passwords
