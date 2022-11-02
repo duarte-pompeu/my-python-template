@@ -18,7 +18,7 @@ flake8 = "4.0.1"
 isort = "5.10.1"
 mypy = "0.961"
 pylint = "2.14.1"
-pytest = "7.1.2"
+pytest = "7.2.0"
 python-dotenv = "0.20.0"
 
 [build-system]
