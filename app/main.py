@@ -1,4 +1,3 @@
-# from app import config_simple as config
 from app import config, webserver
 
 config.setup()
