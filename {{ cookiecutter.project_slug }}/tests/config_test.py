@@ -7,7 +7,7 @@ Unlike config_simple, you may import the module without loading configuration.
 import pytest
 from pydantic import ValidationError
 
-from app.config import GeneralSettings
+from {{ cookiecutter.project_slug }}.config import GeneralSettings
 
 
 def test_empty_settings():
