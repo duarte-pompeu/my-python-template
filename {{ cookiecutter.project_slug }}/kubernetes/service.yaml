@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-python-project
+  name: {{ cookiecutter.project_slug }}-service
 spec:
   selector:
-    app: my-python-project
+    app: {{ cookiecutter.project_slug }}
   ports:
     - protocol: TCP
       port: 80

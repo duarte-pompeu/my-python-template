@@ -4,7 +4,7 @@
 
 .DEFAULT_GOAL:=help
 
-SOURCE:=app
+SOURCE:={{ cookiecutter.project_slug }}
 TESTS:=tests
 EXTRA:=extra
 ALL_CODE := $(SOURCE) $(TESTS) $(EXTRA)
@@ -25,7 +25,7 @@ $(INSTALL_STAMP): poetry.lock pyproject.toml
 
 .PHONY: run
 run: $(INTALL_STAMP)  ## runs the python application
-	PYTHONPATH=. $(CMD) dotenv -f env/app.env run -- python app/main.py
+	PYTHONPATH=. $(CMD) dotenv -f env/app.env run -- python {{ cookiecutter.project_slug }}/main.py
 
 .PHONY: clean
 clean: ## removes files generated during installation or compilation

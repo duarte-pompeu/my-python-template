@@ -1,4 +1,4 @@
-from app import config, webserver
+from {{ cookiecutter.project_slug }} import config, webserver
 
 config.setup()
 

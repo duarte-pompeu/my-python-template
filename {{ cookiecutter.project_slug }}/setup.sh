@@ -3,7 +3,7 @@ set -ex
 
 # default values can be overriden in your shell
 # before running the script
-PYTHON_VERSION=${PYTHON_VERSION:-3.10.5}
+PYTHON_VERSION=${PYTHON_VERSION:-3.11.1}
 PYENV_ROOT=${PYENV_ROOT:-~/.pyenv}
 
 # -i is just a dummy flag so we don't print the string twice

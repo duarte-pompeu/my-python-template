@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-python-project-deployment
+  name: {{ cookiecutter.project_slug }}-deployment
   labels:
-    app: my-python-project
+    app: {{ cookiecutter.project_slug }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-python-project
+      app: {{ cookiecutter.project_slug }}
   template:
     metadata:
       labels:
-        app: my-python-project
+        app: {{ cookiecutter.project_slug }}
     spec:
       containers:
-      - name: my-python-project
-        image: docker.io/library/my-python-project:latest
+      - name: {{ cookiecutter.project_slug }}
+        image: docker.io/library/{{ cookiecutter.project_slug }}:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
@@ -24,5 +24,5 @@ spec:
           - name: EXAMPLE
             valueFrom:
               configMapKeyRef:
-                name: my-python-project
+                name: {{ cookiecutter.project_slug }}-config
                 key: example

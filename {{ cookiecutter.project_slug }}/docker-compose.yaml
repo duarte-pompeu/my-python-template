@@ -1,0 +1,10 @@
+services:
+  {{ cookiecutter.project_slug }}:
+    image: {{ cookiecutter.project_slug }}:latest
+    container_name: {{ cookiecutter.project_slug }}
+    build: .
+    ports:
+    - 8000:8000
+    env_file:
+      - env/app.env
+    # entrypoint: /bin/sleep 3600 # use to debug 
