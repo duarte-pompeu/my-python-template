@@ -1,6 +1,12 @@
 # inspired by https://medium.com/@harpalsahota/dockerizing-python-poetry-applications-1aa3acb76287
+{# FIXME: dont duplicate this #}
+{% set python_version_tuples = cookiecutter.python_version.split(".") -%}
+{% if python_version_tuples|length != 3 %}{% include "error" ~ " Invalid python version. Valid example: '3.11.1'." %}{% endif -%}
+{% set python_version_major, python_version_minor, python_version_patch = python_version_tuples %}
 
-FROM python:3.11-slim
+
+
+FROM python:{{ python_version_major }}.{{ python_version_minor}}-slim
 
 # install poetry and dependencies
 WORKDIR /{{ cookiecutter.project_slug }}
