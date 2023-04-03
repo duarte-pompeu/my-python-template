@@ -17,9 +17,13 @@ ifndef POETRY_ACTIVE
     CMD := poetry run 
 endif
 
+install: $(INSTALL_STAMP)
+$(INSTALL_STAMP): poetry.lock pyproject.toml
+	make install
+
+.PHONY: install
 install: $(INSTALL_STAMP) ## install the project dependencies in a virtual environment
-$(INSTALL_STAMP): poetry.lock pyproject.toml 
-	poetry lock
+	poetry lock --no-update
 	poetry install
 	touch $(INSTALL_STAMP)
 

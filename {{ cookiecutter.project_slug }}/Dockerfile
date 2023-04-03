@@ -11,6 +11,7 @@ WORKDIR /{{ cookiecutter.project_slug }}
 RUN pip3 install poetry==1.1.13
 RUN poetry config virtualenvs.create false
 COPY pyproject.toml .
+COPY poetry.lock .
 RUN poetry install --no-dev
 
 # copy assets
