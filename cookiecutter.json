@@ -2,5 +2,12 @@
     "project_slug": "app",
     "python_version": "3.11.1",
     "docker_and_kubernetes": true,
-    "license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"]
+    "license": [
+        "Not open source",
+        "MIT license",
+        "BSD license",
+        "ISC license",
+        "Apache Software License 2.0",
+        "GNU General Public License v3"
+    ]
 }
