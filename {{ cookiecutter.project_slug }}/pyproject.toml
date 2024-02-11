@@ -1,32 +1,26 @@
-{# FIXME: dont duplicate this #}
-{% set python_version_tuples = cookiecutter.python_version.split(".") -%}
-{% if python_version_tuples|length != 3 %}{% include "error" ~ " Invalid python version. Valid example: '3.11.1'." %}{% endif -%}
-{% set python_version_major, python_version_minor, python_version_patch = python_version_tuples %}
-
-
 [tool.poetry]
-name = "{{ cookiecutter.project_slug }}"
+name = "app"
 version = "0.1.0"
 description = ""
 authors = ["duarte-pompeu <duarte-pompeu@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
-python = "{{ python_version_major }}.{{ python_version_minor}}.*"
+python = "3.12.*"
 
 # https://github.com/Delgan/loguru/releases
-loguru = "0.6.0"
+loguru = "0.7.*"
 # https://github.com/pydantic/pydantic/releases
-pydantic = "1.10.2"
+pydantic = "2.*"
 
 [tool.poetry.dev-dependencies]
-bandit = "1.7.4"
-black = "22.12.0"
-coverage = "6.5.0"
-flake8 = "6.0.0"
-isort = "5.11.2"
-mypy = "0.991"
-pytest = "7.2.0"
-python-dotenv = "0.21.0"
+bandit = "1.*"
+black = "24.1.1"
+coverage = "7.*"
+flake8 = "7.*"
+isort = "5.*"
+mypy = "1.*"
+pytest = "8.*"
+python-dotenv = "1.*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
