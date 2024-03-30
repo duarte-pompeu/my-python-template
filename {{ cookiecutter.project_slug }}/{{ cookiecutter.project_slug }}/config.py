@@ -1,4 +1,6 @@
-from pydantic import BaseSettings
+# TODO(cookiecutter): use pydantic_settings instead of pydantic
+from pydantic_settings import BaseSettings
+
 
 general: "GeneralSettings"
 

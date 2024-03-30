@@ -10,8 +10,10 @@ python = "3.12.*"
 # https://github.com/Delgan/loguru/releases
 loguru = "0.7.*"
 # https://github.com/pydantic/pydantic/releases
-pydantic = "2.*"
+pydantic-settings = "2.*"
 
+# TODO(cookiecutter): use ruff instead of black isort flake8
+# TODO(cookiecutter): update dev
 [tool.poetry.dev-dependencies]
 bandit = "1.*"
 black = "24.1.1"
@@ -22,6 +24,7 @@ mypy = "1.*"
 pytest = "8.*"
 python-dotenv = "1.*"
 
+# TODO(cookiecutter): fix poetry version
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
