@@ -1,6 +1,6 @@
 {
     "project_slug": "app",
-    "python_version": "3.11.4",
+    "python_version": "3.12.2",
     "docker_and_kubernetes": true,
     "license": [
         "Not open source",

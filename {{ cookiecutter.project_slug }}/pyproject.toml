@@ -1,3 +1,8 @@
+{# FIXME: dont duplicate this -#}
+{% set python_version_tuples = cookiecutter.python_version.split(".") -%}
+{% if python_version_tuples|length != 3 %}{% include "error" ~ " Invalid python version. Valid example: '3.11.1'." %}{% endif -%}
+{% set python_version_major, python_version_minor, python_version_patch = python_version_tuples -%}
+
 [tool.poetry]
 name = "app"
 version = "0.1.0"
@@ -5,7 +10,7 @@ description = ""
 authors = ["duarte-pompeu <duarte-pompeu@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
-python = "3.12.*"
+python = "{{python_version_major}}.{{python_version_minor}}.*"
 
 # https://github.com/Delgan/loguru/releases
 loguru = "0.7.*"
